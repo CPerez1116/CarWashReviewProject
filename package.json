@@ -1,0 +1,22 @@
+{
+  "name": "carwashreviewproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CPerez1116/CarWashReviewProject.git"
+  },
+  "author": "Chris Perez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CPerez1116/CarWashReviewProject/issues"
+  },
+  "homepage": "https://github.com/CPerez1116/CarWashReviewProject#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
