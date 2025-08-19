@@ -8,13 +8,15 @@
   <body>
     <header class="titlePage">Car Wash Name</header>
     <img src="images/car1.png" width="100%" height="400px" />
+    <!---------------REVIEWS DISPLAY CONTAINER------------------------------------------------------------------>
     <div class="reviews-container">
       <h2 class="displayMessage">Squeaky Clean Words from Our Customers</h2>
       <div class="reviews-list">
         <!-- Submitted reviews will be displayed here -->
       </div>
     </div>
-    <form class="reviewForm" action="" method="post">
+    <!----------------------------------FORM ---------------------------------------------------->
+    <form id="reviewForm" action="submit-review" method="post">
       <p>
         <label for="name">Name:</label>
         <input
@@ -36,12 +38,19 @@
       <p>
         <label for="review">Share your experience:</label>
         <br />
-        <textarea id="review" name="newReview"></textarea>
+        <textarea
+          id="review"
+          name="newReview"
+          placeholder="Write a Review!"
+        ></textarea>
       </p>
       <p class="button">
-        <button type="submit">Submit</button>
+        <button type="submit" id="submit-button">Submit</button>
       </p>
     </form>
+    <!--bottom div will be used for when form submits we can display message-->
+    <div id="submitted-message"></div>
+    <!------------------------------------FOOTER------------------------------------------->
     <footer id="main-footer">
       <p>Copyright &copy; 2025, Christopher Perez</p>
     </footer>
