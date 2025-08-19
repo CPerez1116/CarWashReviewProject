@@ -33,7 +33,8 @@ app.post("/submit-review", (req, res) => {
     return res.status(400).json({ error: "Missing required fields" });
   }
   // adding object to array container and also adding timestamp
-  reviewsContainer.push({ name, email, review, timestamp: Date.now() });
+  reviewsContainer.push({ name, email, review });
+  console.log("it worked");
   res.json({ message: "Review submitted!", review: { name, email, review } });
 });
 

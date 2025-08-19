@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Car Wash Review</title>
   </head>
   <body>
@@ -16,7 +17,7 @@
       </div>
     </div>
     <!----------------------------------FORM ---------------------------------------------------->
-    <form id="reviewForm" action="submit-review" method="post">
+    <form id="reviewForm">
       <p>
         <label for="name">Name:</label>
         <input
@@ -40,7 +41,7 @@
         <br />
         <textarea
           id="review"
-          name="newReview"
+          name="review"
           placeholder="Write a Review!"
         ></textarea>
       </p>
@@ -54,5 +55,54 @@
     <footer id="main-footer">
       <p>Copyright &copy; 2025, Christopher Perez</p>
     </footer>
+    <!--Submit handler/Adding frontend JS to avoid page reload---------------------------------------------->
+    <script>
+      const reviewForm = document.getElementById("reviewForm"); //getting hold of form
+      const reviewItems = document.querySelector(".reviews-list"); //getting hold of container for reviews
+      const message = document.getElementById("submitted-message"); // getting hold of the container for message
+
+      reviewForm.addEventListener("submit", async (e) => {
+        e.preventDefault(); // prevent browser's default action to reload
+
+        const formData = new FormData(reviewForm); //Creates a new FormData object.
+        const formObject = Object.fromEntries(formData.entries()); //converts form data to JS
+
+        // checking if fields are empty on form
+        if (!formObject.name || !formObject.email || !formObject.review) {
+          message.textContent = " Missing Fields!";
+          return;
+        }
+
+        const jsonFormData = JSON.stringify(formObject); // converts JS object to JSON
+
+        // sending POST to server, using promise
+        try {
+          const response = await fetch("/submit-review", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: jsonFormData,
+          });
+
+          const data = await response.json();
+          console.log("Success:", data);
+
+          const newReview = document.createElement("p");
+
+          reviewItems.innerHTML += `
+          <p class="review-name">Name: ${data.review.name}</p>
+          <p class="review-email">Email: ${data.review.email}</p>
+         
+           <p class="review-text">Review: ${data.review.review}</p>
+          <p class="review-date">Date: ${new Date().toLocaleString()}</p>`;
+
+          reviewForm.reset();
+
+          message.textContent = "Review  submitted successfully!";
+        } catch (error) {
+          console.error("Error:", error);
+          message.textContent = "Failed to submit review.";
+        }
+      });
+    </script>
   </body>
 </html>
